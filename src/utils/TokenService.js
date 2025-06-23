@@ -1,21 +1,9 @@
-// hacerlo así perimite 
-
-
-
-
+const TOKEN_KEY = "jwt"; // o "token", pero consistente con LoginUser
 const TokenService = {
-  getToken: () => {
-      return localStorage.getItem("jwt"); 
+  getToken: () => localStorage.getItem(TOKEN_KEY),
+  setToken: (t) => {
+    if (t) localStorage.setItem(TOKEN_KEY, t);
   },
-  setToken: (token) => {
-      localStorage.setItem("jwt", token);
-  },
-  clearToken: () => {
-      localStorage.removeItem("jwt");
-  },
+  clearToken: () => localStorage.removeItem(TOKEN_KEY),
 };
-
 export default TokenService;
-
-  
-

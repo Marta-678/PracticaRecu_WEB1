@@ -2,12 +2,13 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import styles from '@/styles/sidebar.css';
 import NavBar from './Nabar';
 import TokenService from '@/utils/TokenService';
 
 export default function Sidebar() {
-  // const router = useRouter();
+  const router = useRouter();
 
   const links = [
     // { href: "/", label: "Resumen" },
@@ -20,7 +21,8 @@ export default function Sidebar() {
 
   const handleLogout = () => {
     TokenService.clearToken();  
-    window.location.reload();
+    // window.location.reload();
+    // router.push('/user/onBoarding/login');
 
   };
 

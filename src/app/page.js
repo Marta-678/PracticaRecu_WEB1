@@ -20,6 +20,7 @@ export default function Home() {
   useEffect(() => {
     //al iniciar se intenta ptener el token 
     const token = TokenService.getToken();
+    console.log("Home useEffect, token detectado:", token);
     if (token) {
       setView("pages"); 
     }
@@ -27,8 +28,10 @@ export default function Home() {
   }, []);
 
   const handleLogin = (newToken) => {
-    TokenService.setToken(newToken); 
-    console.log({newToken})
+   console.log("handleLogin recibido newToken:", newToken);
+    if (newToken) {
+      TokenService.setToken(newToken);
+    }
     setView("pages");
   };
 
@@ -43,11 +46,9 @@ export default function Home() {
         {view === "login" && (
   
           <LoginUser
-              onLogin={(newToken) => {
-                handleLogin(newToken);
-              }}
-              onRegisterClick={() => setView("register")}
-            />
+            onLogin={(token) => handleLogin(token)}
+            onRegisterClick={() => setView("register")}
+          />
         )}
 
         {view === "register" && (

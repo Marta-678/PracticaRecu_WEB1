@@ -73,9 +73,9 @@ export default function CreateClient() {
         setIsClientCreated(true);
         //si se confirma se asocia a un proyecto
         const ok= console.log("Registro exitoso:", data);
-        if (ok) {
-          router.back();
-        }
+        // if (ok) {
+        //   router.back();
+        // }
 
       } catch (error) {
         console.error("Error en el registro:", error.message);
