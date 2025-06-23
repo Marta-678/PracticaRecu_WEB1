@@ -120,9 +120,7 @@ export function OrderRow({ order }) {
 
   return (
     <tr className="border-b">
-      <td className="px-4 py-2">
-        <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-600" />
-      </td>
+
       <td className="px-4 py-2 text-sm text-gray-700">
         <Link href={`/pagesInfo/projects/${_id}`}>
           <p>{`#${projectCode}`}</p>

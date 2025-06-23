@@ -13,8 +13,8 @@ export default function ProjectEdit() {
     name: '',
     projectCode: '',
     code: '',
-    clientId: '',
-    userId: '',
+    // clientId: '',
+    // userId: '',
     address: {
       street: '',
       number: '',
@@ -48,8 +48,8 @@ export default function ProjectEdit() {
             name: data.name || '',
             projectCode: data.projectCode || '',
             code: data.code || '',
-            clientId: data.clientId != null ? String(data.clientId) : '',
-            userId: data.userId != null ? String(data.userId) : '',
+            // clientId: data.clientId != null ? String(data.clientId) : '',
+            // userId: data.userId != null ? String(data.userId) : '',
             address: {
               street: data.address?.street || '',
               number: data.address?.number != null ? String(data.address.number) : '',
@@ -103,33 +103,15 @@ export default function ProjectEdit() {
     setSubmitError(null);
     try {
       const payload = {
-        name: formData.name,
-        projectCode: formData.projectCode,
-        code: formData.code,
-        clientId: formData.clientId ? Number(formData.clientId) : null,
-        userId: formData.userId ? Number(formData.userId) : null,
-        address: {
-          street: formData.address.street || null,
-          number: formData.address.number ? Number(formData.address.number) : null,
-          postal: formData.address.postal || null,
-          city: formData.address.city || null,
-          province: formData.address.province || null,
-        },
+        ...formData,
       };
-
-      const response = await fetch(`/api/project/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+      await getFetch(`api/project/${id}`, payload, 'PUT', {
+        'Content-Type': 'application/json'
       });
-      if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`Error ${response.status}: ${text}`);
-      }
       handleBack();
     } catch (err) {
-      console.error("Error al actualizar proyecto:", err);
-      setSubmitError(err.message || 'Error al actualizar proyecto.');
+      console.error("Error al actualizar cliente:", err);
+      setSubmitError(err.message || 'Error al actualizar cliente.');
     } finally {
       setSubmitting(false);
     }
@@ -221,7 +203,7 @@ export default function ProjectEdit() {
         </div>
 
         {/* ID del Cliente */}
-        <div className="detail-field" style={{ marginBottom: '12px' }}>
+        {/* <div className="detail-field" style={{ marginBottom: '12px' }}>
           <label htmlFor="clientId" style={{ display: 'block', marginBottom: '4px' }}>
             ID del Cliente:
           </label>
@@ -233,10 +215,10 @@ export default function ProjectEdit() {
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
-        </div>
+        </div> */}
 
         {/* ID de Usuario */}
-        <div className="detail-field" style={{ marginBottom: '12px' }}>
+        {/* <div className="detail-field" style={{ marginBottom: '12px' }}>
           <label htmlFor="userId" style={{ display: 'block', marginBottom: '4px' }}>
             ID de Usuario:
           </label>
@@ -248,7 +230,7 @@ export default function ProjectEdit() {
             onChange={handleChange}
             style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
-        </div>
+        </div> */}
 
         {/* Dirección */}
         <fieldset style={{ marginBottom: '16px', padding: '12px', borderRadius: '4px', border: '1px solid #ddd' }}>
