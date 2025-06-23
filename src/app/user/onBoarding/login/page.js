@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from "react";
 import * as Yup from "yup";
 import '@/styles/onboarding.css';

@@ -23,6 +23,7 @@ export default function Sidebar() {
     TokenService.clearToken();  
     // window.location.reload();
     // router.push('/user/onBoarding/login');
+    router.replace("/user/onBoarding/login");
 
   };
 
