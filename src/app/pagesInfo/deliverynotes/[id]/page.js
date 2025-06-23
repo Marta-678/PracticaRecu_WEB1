@@ -13,6 +13,7 @@ export default function DeliveryNoteDetail() {
   const [projectName, setProjectName] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     if (!id) {
@@ -66,35 +67,6 @@ export default function DeliveryNoteDetail() {
   }, [id]);
 
 
-  const fetchPDF = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getFetch(`api/deliverynote/pdf/${id}`, null, 'PATCH', {});
-        if (!data) {
-          setError('No se encontró el pdf.');
-          setLoading(false);
-          return;
-        }
-    
-        else {
-          try {
-            const clientData = await getFetch(`api/deliverynote/pdf/${id}`, null, 'GET', {});
-            
-          } catch (err) {
-            console.error("Error al obtener npdf", err);
-            setClientName(null);
-          }
-        }
-  
-      } catch (err) {
-        console.error("Error al obtener pdf:", err);
-        setError(err.message || 'Error al obtener la delivery note.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
   const handleBack = () => {
     router.push('/pagesInfo/deliverynotes');
   };
@@ -103,8 +75,47 @@ export default function DeliveryNoteDetail() {
     router.push(`/pagesInfo/deliverynotes/edit/${id}`);
   };
 
-  const handlePDF = () => {
-    fetchPDF();
+  const handlePDF = async () => {
+    if (!id) {
+      alert('ID de la delivery note no está disponible.');
+      return;
+    }
+
+    setDownloading(true);
+    setError(null);
+
+    try {
+      // 1. PATCH: dispara la generación/preparación del PDF en el backend
+      // Si getFetch devuelve JSON con info relevante, puedes capturarla; si no, simplemente esperas que termine.
+      await getFetch(`api/deliverynote/pdf/${id}`, null, 'PATCH', {});
+
+      // 2. GET: descarga el PDF como blob
+      const response = await getFetch(`api/deliverynote/pdf/${id}`, null, 'GET', {});
+      if (!response.ok) {
+        throw new Error(`Error en la descarga: ${response.status} ${response.statusText}`);
+      }
+      const blob = await response.blob();
+
+      // 3. Crear URL de descarga
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      // Nombre del archivo; ajústalo según prefieras
+      a.download = `deliverynote-${id}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      // Liberar el objeto URL después de un pequeño delay
+      setTimeout(() => {
+        window.URL.revokeObjectURL(url);
+      }, 1000);
+    } catch (err) {
+      console.error("Error al descargar el PDF:", err);
+      alert('Ha ocurrido un error al descargar el PDF: ' + (err.message || 'Error inesperado.'));
+      setError(err.message || 'Error al descargar el PDF.');
+    } finally {
+      setDownloading(false);
+    }
   };
 
   if (loading) {
@@ -207,9 +218,9 @@ export default function DeliveryNoteDetail() {
         <button className="primary-button" onClick={handleEdit}>
           Editar
         </button>
-        <button className="primary-button" onClick={handlePDF}>
+        {/* <button className="primary-button" onClick={handlePDF}>
           Descargar PDF
-        </button>
+        </button> */}
       </div>
     </div>
   );
