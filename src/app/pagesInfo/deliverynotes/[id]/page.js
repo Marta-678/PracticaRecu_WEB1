@@ -37,7 +37,7 @@ export default function DeliveryNoteDetail() {
 
         if (data.clientId) {
           try {
-            const clientData = await getFetch(`api/client/one/${data.clientId}`, null, 'GET', {});
+            const clientData = await getFetch(`api/client/${data.clientId}`, null, 'GET', {});
             setClientName(clientData?.name || null);
           } catch (err) {
             console.error("Error al obtener nombre de cliente:", err);
@@ -65,12 +65,46 @@ export default function DeliveryNoteDetail() {
     fetchDeliveryNote();
   }, [id]);
 
+
+  const fetchPDF = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await getFetch(`api/deliverynote/pdf/${id}`, null, 'PATCH', {});
+        if (!data) {
+          setError('No se encontró el pdf.');
+          setLoading(false);
+          return;
+        }
+    
+        else {
+          try {
+            const clientData = await getFetch(`api/deliverynote/pdf/${id}`, null, 'GET', {});
+            
+          } catch (err) {
+            console.error("Error al obtener npdf", err);
+            setClientName(null);
+          }
+        }
+  
+      } catch (err) {
+        console.error("Error al obtener pdf:", err);
+        setError(err.message || 'Error al obtener la delivery note.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
   const handleBack = () => {
     router.push('/pagesInfo/deliverynotes');
   };
 
   const handleEdit = () => {
     router.push(`/pagesInfo/deliverynotes/edit/${id}`);
+  };
+
+  const handlePDF = () => {
+    fetchPDF();
   };
 
   if (loading) {
@@ -168,9 +202,15 @@ export default function DeliveryNoteDetail() {
         ))}
       </div>
 
-      <button className="primary-button" onClick={handleEdit}>
-        Editar
-      </button>
+      <div className="detail-actions" style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+
+        <button className="primary-button" onClick={handleEdit}>
+          Editar
+        </button>
+        <button className="primary-button" onClick={handlePDF}>
+          Descargar PDF
+        </button>
+      </div>
     </div>
   );
 }

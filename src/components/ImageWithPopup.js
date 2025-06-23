@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 function ImageWithPopup({ src, alt, children, toggleOnClick = true, closeButtonLabel = 'Cerrar' }) {
   const [open, setOpen] = useState(false);
@@ -17,11 +18,13 @@ function ImageWithPopup({ src, alt, children, toggleOnClick = true, closeButtonL
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
-      <img
+      <Image
         src={src}
         alt={alt}
         onClick={handleImageClick}
-        style={{ cursor: 'pointer' }}
+        // style={{ cursor: 'pointer' }}
+        width={20}              // ancho real o deseado
+        height={10}             // alto real o deseado
       />
       {open && (
         <div
@@ -29,7 +32,6 @@ function ImageWithPopup({ src, alt, children, toggleOnClick = true, closeButtonL
             position: 'absolute',
             top: '100%',
             left: 0,
-            // Sin estilos adicionales por ahora
           }}
         >
           {/* Botón de cierre */}

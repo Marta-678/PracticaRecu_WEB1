@@ -34,6 +34,8 @@ export default function Header({ tittle }) {
       
       <div>
       <h1>{user.email}</h1>
+
+      <ImageWithPopup src={"/img/no-logo.png"} alt={"/img/no-logo.png"} ></ImageWithPopup>
       
       <div/>
 
