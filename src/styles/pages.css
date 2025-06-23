@@ -1,0 +1,23 @@
+/* Contenedor principal del layout */
+.page-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Hace que el layout ocupe toda la altura de la ventana */
+  }
+  
+
+  /* Contenedor que envuelve Sidebar y main */
+  .layout-content {
+    display: flex;
+    flex: 1; /* Toma todo el espacio disponible */
+  }
+  
+
+  /* Contenido principal que ocupa el espacio restante */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    background: linear-gradient(135deg, #d8b4fe 0%, #a5b4fc 100%);
+  }
+  
+  

@@ -1,0 +1,333 @@
+/* Contenedor de la lista de clientes */
+.clients-table {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+  background: white;
+  border-radius: 0.75rem;
+}
+
+/* Cada fila: antes era inline style en <li> */
+.client-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem; /* 10px ~ 0.625rem, pero ajusta según prefieras */
+  border-bottom: 1px solid #e5e7eb; 
+  background: white;
+}
+
+/* Alternar fondo en filas pares */
+.client-row:nth-child(even) {
+  background: #f9fafb;
+}
+
+
+.client-link {
+  color: #1e40af;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.client-link:hover {
+  text-decoration: underline;
+}
+
+.client-email {
+  color: #1e293b;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+
+.client-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edit-button {
+  background: #e0d9e6;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  
+}
+
+.edit-button:hover {
+  background: #d8b4fe ;
+  transform: translateY(-1px);
+}
+
+.delete-button {
+  background: #e0d9e6;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  
+}
+
+.delete-button:hover {
+  background:#d8b4fe ;
+  transform: translateY(-1px);
+}
+
+/* Wrapper del enlace “Crear Nuevo Cliente” */
+.create-client-wrapper {
+  margin-top: 1rem;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #5c5edf;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+}
+.back-button:hover {
+  text-decoration: underline;
+}
+
+/* Encabezado de detalle */
+.detail-header h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1e293b;
+  margin: 0 0 1rem;
+}
+
+/* Contenedor de campos de detalle */
+.detail-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+  .detail-fields {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.detail-field {
+  font-size: 0.95rem;
+  color: #374151;
+}
+.detail-field strong {
+  color: #1e293b;
+}
+
+/* Sección de proyectos */
+.projects-section {
+  margin-top: 2rem;
+}
+.projects-section h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+/* Tabla de proyectos */
+.projects-table-wrapper {
+  overflow-x: auto;
+}
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.projects-table th,
+.projects-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.projects-table thead {
+  background: #7c3aed;
+}
+.projects-table thead th {
+  color: white;
+  font-weight: 500;
+}
+/* Redondear esquinas en cabecera */
+.projects-table thead tr th:first-child {
+  border-top-left-radius: 0.75rem;
+}
+.projects-table thead tr th:last-child {
+  border-top-right-radius: 0.75rem;
+}
+/* Filas alternadas */
+.projects-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+.projects-table tbody tr:nth-child(odd) {
+  background: white;
+}
+.projects-table tbody tr td {
+  border-bottom: 1px solid #eee;
+  color: #1e293b;
+}
+
+/* Badges de estado */
+.status-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+}
+
+.edit-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+
+.primary-button{
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #7c3aed 0%, #5b21b6 100%);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.status-finalizado {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+.status-en-marcha {
+  background-color: #fef9c3;
+  color: #7c2d12;
+}
+.status-pendiente {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+.status-otro {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* Mensajes de carga y error */
+.loading-text {
+  text-align: center;
+  padding: 2rem;
+  color: #4b5563;
+}
+.error-text {
+  color: #dc2626;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.error-back-button {
+  background: linear-gradient(90deg, #7c3aed 0%, #5b21b6 100%);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+.error-back-button:hover {
+  background: linear-gradient(90deg, #9333ea 0%, #6b21a8 100%);
+}
+
+/* Wrapper con overflow para la tabla */
+.delivery-table-wrapper {
+  overflow-x: auto;
+}
+
+/* Tabla principal de delivery notes */
+.delivery-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilos para th y td */
+.delivery-table th,
+.delivery-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #1e293b;
+  border-bottom: 1px solid #eee;
+}
+
+/* Cabecera */
+.delivery-table thead {
+  background: #7c3aed; /* púrpura como en proyectos */
+}
+.delivery-table thead th {
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+/* Redondear esquinas en cabecera */
+.delivery-table thead tr th:first-child {
+  border-top-left-radius: 0.75rem;
+}
+.delivery-table thead tr th:last-child {
+  border-top-right-radius: 0.75rem;
+}
+
+/* Filas alternadas */
+.delivery-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+.delivery-table tbody tr:nth-child(odd) {
+  background: white;
+}
+
+/* Estado de selección: si quieres destacar fila seleccionada */
+.delivery-table tbody tr.selected {
+  background: #e0d9e6; /* por ejemplo un ligero fondo */
+}
+
+/* Checkbox en cabecera y celdas: ajusta tamaño y margen si es necesario */
+.delivery-checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #7c3aed; /* si quieres que combine con cabecera */
+  margin: 0;
+}
+
+/* Puedes ajustar título de columna con flex si quisieras icono de orden */
+.delivery-table th.sortable {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Icono de orden: heredará color blanco en thead o gris en tbody según contexto */
+.delivery-sort-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.25rem;
+  color: currentColor;
+}
+

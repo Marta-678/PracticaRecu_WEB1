@@ -1,0 +1,15 @@
+.home-container {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background: linear-gradient(135deg, #d8b4fe 0%, #a5b4fc 100%);
+font-family: 'Arial', sans-serif;
+}
+
+.view-container {
+width: 100%;
+max-width: 1200px;
+padding: 20px;
+box-sizing: border-box;
+}
